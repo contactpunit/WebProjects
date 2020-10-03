@@ -10,7 +10,10 @@ class FormValidation {
 
     eventHandler(event) {
         event.preventDefault();
+        let pass1 = '';
+        let pass2 = '';
         const elements = this.form.querySelectorAll('input');
+
         for (const elem of elements) {
             if (!elem.value || !elem.value.trim()) {
                 this.showError(elem, elem.id + ' is required');
@@ -18,7 +21,30 @@ class FormValidation {
             else {
                 this.showSuccess(elem);
             }
+            if (elem.id === 'email' && elem.value) {
+                if (!this.validateEmail(elem)) {
+                    this.showError(elem, 'email format is not valid');
+                }
+            }
+            else if (elem.id === 'password' && elem.value) {
+                pass1 = elem;
+                if (!elem.value || elem.value.length < 5) {
+                    this.showError(elem, 'password length should be atleat 5 characters');
+                }
+            }
+            else if (elem.id === 'password2' && elem.value) {
+                pass2 = elem;
+                if (pass1.value !== pass2.value) {
+                    this.showError(pass2, 'passwords dont match');
+                }
+            }
         }
+    }
+
+    validateEmail(input) {
+        const email = input.value;
+        const re = /^\S+\@\S+\.\S+$/;
+        return re.test((email).toString().toLowerCase());
     }
 
     showError(input, message) {
@@ -31,7 +57,6 @@ class FormValidation {
     showSuccess(input) {
         const formControl = input.parentElement;
         formControl.className = 'form-control success';
-        // const small = formControl.querySelector('small');
     }
 
 }
