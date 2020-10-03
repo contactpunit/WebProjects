@@ -11,7 +11,6 @@ class FormValidation {
     eventHandler(event) {
         event.preventDefault();
         let pass1 = '';
-        let pass2 = '';
         const elements = this.form.querySelectorAll('input');
 
         for (const elem of elements) {
@@ -33,9 +32,9 @@ class FormValidation {
                 }
             }
             else if (elem.id === 'password2' && elem.value) {
-                pass2 = elem;
-                if (pass1.value !== pass2.value) {
-                    this.showError(pass2, 'passwords dont match');
+                // pass2 = elem;
+                if (pass1.value !== elem.value) {
+                    this.showError(elem, 'passwords dont match');
                 }
             }
         }
