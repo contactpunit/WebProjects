@@ -13,4 +13,6 @@ This is a collection of web problems, solved using :
 
 ## Projects
 
-#### * Form Validation using Javascript
+#### 1. Form Validation using Javascript
+#### 2. Movie Seat Booking
+
