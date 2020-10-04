@@ -32,9 +32,9 @@ class Movie {
             this.movie.selectedIndex = +movieIndex;
             this.ticketPrice = localStorage.getItem('moviePrice');
             this.seatNumbers = JSON.parse(localStorage.getItem('selectedSeatsIndex'));
-            if(this.seatNumbers) {
+            if (this.seatNumbers) {
                 this.allSeats.forEach((seat, index) => {
-                    if(this.seatNumbers.includes(index)) {
+                    if (this.seatNumbers.includes(index)) {
                         seat.classList.add('selected')
                     }
                 });
