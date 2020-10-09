@@ -16,3 +16,4 @@ This is a collection of web problems, solved using :
 #### 1. Form Validation using Javascript
 #### 2. Movie Seat Booking
 #### 3. VideoPlayer
+#### 4. Rate Calculator
