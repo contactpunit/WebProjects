@@ -17,3 +17,5 @@ This is a collection of web problems, solved using :
 #### 2. Movie Seat Booking
 #### 3. VideoPlayer
 #### 4. Rate Calculator
+#### 5. Dom Array  Methods
+#### 6. Menu Slidr and Modal
