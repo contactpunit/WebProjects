@@ -60,7 +60,8 @@ h3 {
     display: flex;
     justify-content: space-between;
     font-weight: 300;
-    margin: 0 0 20px;
+    margin: 20px 0 0;
+    flex: 1;
 }
 
 .person {
