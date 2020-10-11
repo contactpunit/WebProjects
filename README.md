@@ -18,4 +18,4 @@ This is a collection of web problems, solved using :
 #### 3. VideoPlayer
 #### 4. Rate Calculator
 #### 5. Dom Array  Methods
-#### 6. Menu Slidr and Modal
+#### 6. Menu Slider and Modal
