@@ -19,3 +19,4 @@ This is a collection of web problems, solved using :
 #### 4. Rate Calculator
 #### 5. Dom Array  Methods
 #### 6. Menu Slider and Modal
+#### 7. Hangman Game
