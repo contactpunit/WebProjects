@@ -20,3 +20,4 @@ This is a collection of web problems, solved using :
 #### 5. Dom Array  Methods
 #### 6. Menu Slider and Modal
 #### 7. Hangman Game
+#### 8. Meal Finder
