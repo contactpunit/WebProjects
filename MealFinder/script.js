@@ -6,24 +6,60 @@ class MealFinder {
         this.mealsEl = document.querySelector('#meals');
         this.apiBaseUrl = 'https://www.themealdb.com/api/json/v1/1/search.php?s=';
         this.mealByIdUrl = 'https://www.themealdb.com/api/json/v1/1/lookup.php?i='
+        this.randomMealUrl = 'https://www.themealdb.com/api/json/v1/1/random.php';
         this.search.value = '';
         this.resultHeading = document.querySelector('#result-heading');
         this.singleMealEl = document.querySelector('#single-meal');
         this.form.addEventListener('submit', this.searchMealAndRender.bind(this));
         this.mealsEl.addEventListener('click', this.showRecipe.bind(this));
+        this.random.addEventListener('click', this.displayRandomMeal.bind(this));
+    }
+
+    displayRandomMeal() {
+        this.cleanUp();
+        fetch(`${this.randomMealUrl}`)
+            .then(response => response.json())
+            .then(data => {
+                const meal = data.meals[0];
+                this.getMealDetails(meal);
+            })
+    }
+
+    cleanUp() {
+        this.mealsEl.innerHTML = '';
+        this.singleMealEl.innerHTML = '';
+        this.resultHeading.innerHTML = '';
+        this.search.value = '';
     }
 
     showRecipe(event) {
         let mealid = ''
         if ([...event.target.classList].includes('meal-info')) {
-            console.log(event.target.dataset.mealid)
             mealid = event.target.dataset.mealid
             this.getMealById(mealid)
         }
         else if ([...event.target.parentNode.classList].includes('meal-info')) {
-            console.log(event.target.parentNode.dataset.mealid)
             mealid = event.target.parentNode.dataset.mealid
             this.getMealById(mealid)
+        }
+    }
+
+    getMealDetails(meal) {
+        const ingredients = [];
+        const mealDetails = meal;
+        const results = Object.keys(mealDetails).filter(
+            value => /strIngredient*/.test(value));
+        for (const key of results) {
+            const index = key.match(/strIngredient(\d+)/) || []
+            if (index && index[1]) {
+                let measure = mealDetails['strMeasure' + index[1]];
+                if (measure) {
+                    ingredients.push(`${mealDetails[key]} - ${measure}`)
+                }
+            }
+        }
+        if (ingredients) {
+            this.addMealToDom(ingredients, mealDetails);
         }
     }
 
@@ -32,26 +68,9 @@ class MealFinder {
         const result = fetch(mealByIdUrl)
             .then(response => response.json())
             .then(data => {
-                const ingredients = [];
-                const mealDetails = data.meals[0];
-                const results = Object.keys(mealDetails).filter(
-                    value => /strIngredient*/.test(value));
-                for (const key of results) {
-                    const index = key.match(/strIngredient(\d+)/) || []
-                    if (index && index[1]) {
-                        let measure = mealDetails['strMeasure' + index[1]];
-                        if (measure) {
-                            ingredients.push(`${mealDetails[key]} - ${measure}`)
-                        }
-                    }
-                }
-                console.log(ingredients);
-                // console.log(results)
-                if (ingredients) {
-                    this.addMealToDom(ingredients, mealDetails);
-                }
-            }
-            )
+                const meal = data.meals[0];
+                this.getMealDetails(meal);
+            })
     }
 
     addMealToDom(ingredients, mealDetails) {
@@ -59,7 +78,9 @@ class MealFinder {
             <div class="single-meal">
                 <h1>${mealDetails.strMeal}</h1>
                 <img src="${mealDetails.strMealThumb}" alt="${mealDetails.strMeal}" />
-                <div class="single-meal-info"></div>
+                <div class="single-meal-info">
+                  <p>${mealDetails.strCategory}</p>
+                </div>
                 <div class="main">
                     <p>${mealDetails.strInstructions}</p>
                     <h2>Ingredients</h2>
@@ -78,6 +99,7 @@ class MealFinder {
     }
 
     searchMeal(apiUrl, searchString) {
+        this.cleanUp();
         const result = fetch(apiUrl)
             .then(response => response.json())
             .then(data => {
@@ -85,7 +107,6 @@ class MealFinder {
                     this.resultHeading.innerHTML = `<p>There are 0 search results for '${searchString}'</p>`
                 }
                 else {
-                    console.log(data)
                     this.resultHeading.innerHTML = `<h2>Search results for '${searchString}'</h2>`
                     this.mealsEl.innerHTML = data.meals.map(meal => `
                         <div class="meal">
