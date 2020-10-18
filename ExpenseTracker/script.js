@@ -69,16 +69,29 @@ class ExpenseTracker {
         const newTransactionEl = document.createElement('li');
         newTransactionEl.classList.add(transaction.amount < 0 ? 'minus' : 'plus')
         newTransactionEl.innerHTML = `
-        ${transaction.text} <span>${sign}$${Math.abs(transaction.amount)}</span><button class="delete-btn" onclick="this.removeTransaction(${transaction.id})">x</button>
+        ${transaction.text} <span>${sign}$${Math.abs(transaction.amount)}</span><button class="delete-btn" data-removeicon="${transaction.id}">x</button>
         `;
         this.list.appendChild(newTransactionEl);
+        const latestTransaction = document.querySelector(`[data-removeicon="${transaction.id}"]`);
+        latestTransaction.addEventListener('click', this.removeTransaction.bind(this, transaction.id));
+    }
+
+    removeTransactionDom(index, text) {
+        const allLi = this.list.querySelectorAll('li');
+        const nodeToRemove = [...allLi][index];
+        this.list.removeChild(nodeToRemove);
     }
 
     removeTransaction(transactionId) {
-        const filteredTransactions = this.transactions.filter(trans => trans.id !== transactionId);
-        console.log(filteredTransactions)
+        const transactionIndex = this.transactions.findIndex(element => element.id === transactionId)
+        if (transactionIndex !== -1) {
+            const transactionText = this.transactions[transactionIndex].text;
+            this.transactions.splice(transactionIndex, 1);
+            this.removeTransactionDom(transactionIndex, transactionText);
+            const results = this.calculateBalance();
+            this.renderBalance(results);
+        }
     }
-
 }
 
 const e = new ExpenseTracker()
