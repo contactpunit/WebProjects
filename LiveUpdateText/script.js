@@ -1,6 +1,8 @@
 const textEl = document.querySelector('#text');
-const span = document.querySelector('span');
+const wordCount = document.querySelector('#word-count');
+const charCount = document.querySelector('#character-count');
 
 textEl.addEventListener('input', () => {
-    span.textContent = textEl.value.length;
+    charCount.textContent = textEl.value.length;
+    wordCount.textContent = textEl.value.split(' ').length;
 })
