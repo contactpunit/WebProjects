@@ -1,7 +1,6 @@
 const quoteEl = document.querySelector('#quote');
 const button = document.querySelector('button');
 button.addEventListener('click', getQuote);
-window.addEventListener('load', getQuote);
 const quoteUrl = 'https://ron-swanson-quotes.herokuapp.com/v2/quotes';
 function getQuote() {
     fetch(quoteUrl)
@@ -12,3 +11,4 @@ function getQuote() {
         })
         .catch(error => console.log(error))
 }
+getQuote();
