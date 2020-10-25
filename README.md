@@ -24,3 +24,4 @@ This is a collection of web problems, solved using :
 #### 9. Expense Tracker
 #### 10. Quote Generator
 #### 11. Music Player
+#### 12. Infinite Scrolling
