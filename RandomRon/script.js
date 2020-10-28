@@ -10,14 +10,16 @@ function getQuote() {
         .then(response => response.json())
         .then(data => {
             const quote = data[0];
-            if (oldQuotes.indexOf(quote) == -1) {
+            if (oldQuotes.indexOf(quote) === -1) {
                 if (oldQuotes.length >= maxLen) {
                     oldQuotes.shift();
                 }
                 oldQuotes.push(quote);
             }
             else {
+                console.log('this is a repeat' + quote)
                 getQuote();
+                return
             }
             quoteEl.textContent = quote;
         })
