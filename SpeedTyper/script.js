@@ -9,7 +9,7 @@ class SpeedTyping {
         this.settingsForm = document.querySelector('#settings-form')
         this.settings = document.querySelector('#settings');
         this.difficultySelect = document.querySelector('#difficulty');
-        this.difficultyMap = { 'easy': 10, 'medium': 5, 'hard': 1 };
+        this.difficultyMap = { easy: 10, medium: 5, hard: 1 };
         this.generateAndupdateWord();
         this.scoreValue = 0;
         this.timeCounter = 10;
