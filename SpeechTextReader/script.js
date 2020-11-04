@@ -6,6 +6,16 @@ class SpeachReader {
         this.toggleBtn = document.querySelector('#toggle');
         this.textEl = document.querySelector('#text');
         this.close = document.querySelector('.close');
+        this.message = new SpeechSynthesisUtterance();
+        this.toggleBtn.addEventListener('click', () => {
+            const textbox = document.querySelector('.text-box');
+            textbox.classList.toggle('show');
+        })
+        this.close.addEventListener('click', () => {
+            const textbox = document.querySelector('.text-box');
+            textbox.classList.remove('show');
+        })
+
         this.data = [
             {
                 image: './img/drink.jpg',
@@ -57,6 +67,18 @@ class SpeachReader {
             }
         ];
         this.renderImages();
+        this.populateVoicesOption();
+        speechSynthesis.addEventListener('voiceschanged', this.populateVoicesOption.bind(this));
+    }
+
+    populateVoicesOption() {
+        const voices = speechSynthesis.getVoices();
+        voices.forEach(voice => {
+            const option = document.createElement('option');
+            option.value = voice.name;
+            option.innerText = `${voice.name} ${voice.lang}`
+            this.voicesSelectList.appendChild(option);
+        })
     }
 
     renderImages() {
@@ -68,8 +90,18 @@ class SpeachReader {
                 <img src="${image}" alt="${text}" />
                 <p class=info>${text}</p>
             `
+            divEl.addEventListener('click', () => {
+                this.imageOnClickActions(divEl, text);
+            })
             this.main.appendChild(divEl)
         })
+    }
+
+    imageOnClickActions(divEl, text) {
+        divEl.classList.add('active');
+        this.message.text = text;
+        speechSynthesis.speak(this.message);
+        divEl.classList.remove('active');
     }
 }
 
