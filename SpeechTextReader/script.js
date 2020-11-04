@@ -62,7 +62,7 @@ class SpeachReader {
     renderImages() {
         this.data.forEach(element => {
             const divEl = document.createElement('div');
-            const {image, text} = element;
+            const { image, text } = element;
             divEl.classList.add('box');
             divEl.innerHTML = `
                 <img src="${image}" alt="${text}" />
