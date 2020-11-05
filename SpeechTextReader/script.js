@@ -7,14 +7,6 @@ class SpeachReader {
         this.textEl = document.querySelector('#text');
         this.close = document.querySelector('.close');
         this.message = new SpeechSynthesisUtterance();
-        this.toggleBtn.addEventListener('click', () => {
-            const textbox = document.querySelector('.text-box');
-            textbox.classList.toggle('show');
-        })
-        this.close.addEventListener('click', () => {
-            const textbox = document.querySelector('.text-box');
-            textbox.classList.remove('show');
-        })
 
         this.data = [
             {
@@ -66,9 +58,34 @@ class SpeachReader {
                 text: 'I Want To Go To Grandmas'
             }
         ];
+
         this.renderImages();
         this.populateVoicesOption();
+
+        this.toggleBtn.addEventListener('click', () => {
+            const textbox = document.querySelector('.text-box');
+            textbox.classList.toggle('show');
+        })
+
+        this.close.addEventListener('click', () => {
+            const textbox = document.querySelector('.text-box');
+            textbox.classList.remove('show');
+            this.textEl.value = '';
+        })
+
         speechSynthesis.addEventListener('voiceschanged', this.populateVoicesOption.bind(this));
+
+        this.voicesSelectList.addEventListener('change', (event) => {
+            this.message.voice = speechSynthesis.getVoices().find(voice => {
+                return voice.name === event.target.value;
+            })
+        })
+
+        this.readBtn.addEventListener('click', () => {
+            const text = this.textEl.value;
+            this.message.text = text;
+            speechSynthesis.speak(this.message);
+        })
     }
 
     populateVoicesOption() {
