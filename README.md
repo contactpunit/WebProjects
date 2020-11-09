@@ -32,3 +32,4 @@ This is a collection of web problems, solved using :
 #### 17. Shuffle Array
 #### 18. Memory Cards
 #### 19. Shuffle Monster Game
+#### 20. Monster Game using id selector method
