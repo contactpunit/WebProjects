@@ -34,3 +34,4 @@ This is a collection of web problems, solved using :
 #### 19. Shuffle Monster Game
 #### 20. Monster Game using id selector method
 #### 21. Generate TOC from h2 elements
+#### 22. Add missing ID's to h2 elements
