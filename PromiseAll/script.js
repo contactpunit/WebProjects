@@ -25,10 +25,8 @@ const loc = fetch('https://ipapi.co/json')
     })
 
 loc.then(values => {
-    values = {}
     const app = document.querySelector('#app');
     if (Object.keys(values).length > 0 ) {
-        console.log(Object.keys)
         app.innerHTML = `
         <div>Precipitation - ${values.precip} mm</div>
         <div>Pressure - ${values.pres} pa</div>
