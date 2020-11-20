@@ -11,6 +11,7 @@ class Cards {
         this.clearBtn = document.getElementById('clear');
         this.cardsContainer = document.getElementById('cards-container');
         this.allCards = [];
+        this.activeCard = 0;
         this.cardData = [
             {
                 question: 'What is a programming language?',
@@ -31,7 +32,7 @@ class Cards {
             if (index === 0) {
                 card.classList.add('active')
             }
-            card.innerHtml = `
+            card.innerHTML = `
                 <div class="inner-card">
                     <div class="inner-card-front">
                         <p>
@@ -45,9 +46,33 @@ class Cards {
                     </div>
                 </div>
             `
+            card.addEventListener('click', () => card.classList.toggle('show-answer'))
             this.allCards.push(card);
             this.cardsContainer.appendChild(card);
+            this.updateCardNumber();
         });
+        this.nxtBtn.addEventListener('click', () => {
+            this.allCards[this.activeCard].className = 'card left';
+            this.activeCard = this.activeCard + 1;
+            if (this.activeCard > this.allCards.length -1) {
+                this.activeCard = this.allCards.length -1
+            }
+            this.allCards[this.activeCard].className = 'card active';
+            this.updateCardNumber();
+        })
+        this.prevBtn.addEventListener('click', () => {
+            this.allCards[this.activeCard].className = 'card right';
+            this.activeCard = this.activeCard - 1;
+            if (this.activeCard < 0) {
+                this.activeCard = 0;
+            }
+            this.allCards[this.activeCard].className = 'card active';
+            this.updateCardNumber();
+        })
+    }
+
+    updateCardNumber() {
+        this.current.innerText = `${this.activeCard + 1}/${this.cardData.length}`
     }
 }
 
