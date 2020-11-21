@@ -52,13 +52,18 @@ class Cards {
 
     addNewCard() {
         this.loadCards();
-        this.cardData.push({
-            question: this.questionEl.value,
-            answer: this.answerEl.value
-        })
-        localStorage.setItem('cards', JSON.stringify(this.cardData));
-        this.addContainer.classList.remove('show');
-        this.displayCards();
+        const question = this.questionEl.value;
+        const answer = this.answerEl.value;
+        if (question.trim() && answer.trim()) {
+            this.cardData.push({
+                question: question,
+                answer: answer
+            })
+            this.addContainer.classList.remove('show');
+            localStorage.setItem('cards', JSON.stringify(this.cardData));
+            window.location.reload();
+            this.displayCards();
+        }
     }
 
     updateCardNumber() {
