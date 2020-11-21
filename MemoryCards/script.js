@@ -48,6 +48,12 @@ class Cards {
         })
 
         this.addCardBtn.addEventListener('click', this.addNewCard.bind(this));
+
+        this.clearBtn.addEventListener('click', () => {
+            localStorage.setItem('cards', JSON.stringify([]));
+            this.loadCards();
+            window.location.reload();
+        })
     }
 
     addNewCard() {
