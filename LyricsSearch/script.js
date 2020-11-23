@@ -17,12 +17,24 @@ class LyricsSearch {
             else {
                 try {
                     const data = await this.searchSongs(searchText);
-                    console.log(data)
                     await this.renderData(data);
                 }
                 catch (err) {
                     console.log(err)
                 }
+            }
+        })
+        this.resultsEl.addEventListener('click', async (event) => {
+            if (event.target.tagName === 'BUTTON') {
+                let artist = event.target.getAttribute('data-artist');
+                let title = event.target.getAttribute('data-songtitle');
+                const lyricsData = await fetch(`${this.apiUrl}/v1/${artist}/${title}`)
+                    .then(res => res.json())
+                    .then(data => data)
+                const lyrics = lyricsData.lyrics.replace(/\r\n|\r|\n/g, '<br>');
+                this.resultsEl.innerHTML = `<h2><strong>${artist}<\strong> - ${title}<\h2>
+                <span>${lyrics}<\span>`
+                this.moreEl.innerHTML = '';
             }
         })
     }
