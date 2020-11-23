@@ -34,5 +34,5 @@ var methods = (function () {
     return DomTasks;
 })()
 
-const domMethods = new methods('.btn-blue')
+const domMethods = new methods('.btn-blue');
 console.log(domMethods.addClass('btn-purple'))

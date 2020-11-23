@@ -92,7 +92,7 @@ ul.songs {
   padding: 0;
 }
 
-ul.songs.li {
+ul.songs li {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -119,6 +119,6 @@ ul.songs.li {
 }
 
 .centered button {
-  transform: scale(0.3);
-  margin: 15px;
+  transform: scale(1);
+  margin: 35px;
 }
