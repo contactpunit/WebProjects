@@ -37,3 +37,4 @@ This is a collection of web problems, solved using :
 #### 22. Add missing ID's to h2 elements
 #### 23. Weather App
 #### 24. Lyrics Search
+#### 25. Chaining Methods
