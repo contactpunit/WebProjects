@@ -38,3 +38,4 @@ This is a collection of web problems, solved using :
 #### 23. Weather App
 #### 24. Lyrics Search
 #### 25. Chaining Methods
+#### 26. Relaxer App
