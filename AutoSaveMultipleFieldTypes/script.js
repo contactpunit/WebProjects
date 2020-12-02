@@ -1,3 +1,5 @@
+const button = document.querySelector('button');
+
 const getTypeOrName = function (field) {
     if (field.id.length > 0) {
         return field.id;
@@ -38,11 +40,11 @@ function inputHandler(event) {
     localStorage.setItem('FormData', JSON.stringify(FormData))
 }
 
-window.addEventListener('load', loadHandler);
 document.addEventListener('input', inputHandler)
 
-const button = document.querySelector('button');
 button.addEventListener('click', (event) => {
     event.preventDefault();
     localStorage.removeItem('FormData');
-})
+});
+
+loadHandler();
