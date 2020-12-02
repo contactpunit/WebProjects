@@ -12,7 +12,7 @@ const getTypeOrName = function (field) {
 
 function loadHandler() {
     const FormData = localStorage.getItem('FormData') ? JSON.parse(localStorage.getItem('FormData')) : {};
-    const elems = document.querySelectorAll('#save-me input, #save-me textarea, #save-me input[type=checkbox]');
+    const elems = document.querySelectorAll('#save-me input, #save-me textarea, #save-me select');
     if (Object.keys(FormData).length > 0) {
         Array.prototype.slice.call(elems).forEach(element => {
             if (getTypeOrName(element)) {
