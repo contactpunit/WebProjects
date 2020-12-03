@@ -39,3 +39,5 @@ This is a collection of web problems, solved using :
 #### 24. Lyrics Search
 #### 25. Chaining Methods
 #### 26. Relaxer App
+#### 27. AutoSave to LocalStorage
+#### 28. Breakout Game
