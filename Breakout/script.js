@@ -19,6 +19,7 @@ class BreakOut {
         this.drawBall();
         this.drawPaddle();
         this.drawScore();
+        this.drawBricks();
     }
 
     get ball() {
@@ -41,6 +42,41 @@ class BreakOut {
             speed: 8,
             dx: 0
         }
+    }
+
+    get bricks() {
+        return {
+            brickRowCount: 9,
+            brickColumnCount: 5,
+            w: 70,
+            h: 20,
+            padding: 10,
+            offsetX: 45,
+            offsetY: 60,
+            visible: true
+        }
+    }
+
+    drawBricks() {
+        const bricksArray = [];
+        for (let i = 0; i < this.bricks.brickRowCount; i++) {
+            bricksArray[i] = [];
+            for (let j = 0; j < this.bricks.brickColumnCount; j++) {
+                const x = i * (this.bricks.w + this.bricks.padding) + this.bricks.offsetX;
+                const y = j * (this.bricks.h + this.bricks.padding) + this.bricks.offsetY;
+                bricksArray[i][j] = { x, y, ...this.bricks }
+            }
+        }
+        console.log(bricksArray)
+        bricksArray.forEach(columns => {
+            columns.forEach(brick => {
+                this.ctx.beginPath();
+                this.ctx.rect(brick.x, brick.y, brick.w, brick.h);
+                this.ctx.fillStyle = brick.visible ? '#0095dd' : 'transparent';
+                this.ctx.fill();
+                this.ctx.closePath();
+            })
+        })
     }
 
     drawBall() {
