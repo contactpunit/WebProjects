@@ -1,0 +1,46 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background-color: lightblue;
+  height: 100vh;
+  width: 100vw;
+  margin: 0 20px;
+}
+
+#app {
+  display: flex;
+  text-align: center;
+}
+
+.all-articles {
+  text-align: left;
+}
+
+h1 {
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.datasource {
+  background-color: green;
+  color: white;
+  width: 20vw;
+  top: 20px;
+  font-size: 20px;
+}
+
+.datasource.red {
+  background-color: red;
+}
+
+.article {
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 20px;
+  border: 40px;
+}
