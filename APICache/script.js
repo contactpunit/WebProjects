@@ -2,15 +2,17 @@ const elem = document.querySelector('.all-articles');
 
 function loadData() {
     const storageKey = 'newsData';
-    const expiryTime = 1000 * 60;
+    const expiryTime = 1000 * 6;
     const url = 'https://vanillajsacademy.com/api/pirates.json';
 
     const cacheData = isDataValid(storageKey, expiryTime);
     if (cacheData) {
+        console.log('getting from cache');
         renderData(cacheData);
     }
     else {
-        const pirateData = fetch(url)
+        console.log('getting from fetch call');
+        fetch(url)
             .then(res => res.json())
             .then(data => data.articles)
             .then((articles) => {
@@ -18,7 +20,7 @@ function loadData() {
                 renderData(articles);
             })
             .catch(err => {
-                console.log(`Error in fetching data: ${err}`)
+                console.log(`Error in fetching data: ${err}`);
             })
     }
 }
@@ -30,7 +32,7 @@ function isDataValid(storageKey, expiryTime) {
     const data = JSON.parse(newsData);
     if (!data.data || !data.timestamp) return false;
     const difference = new Date().getTime() - data.timestamp;
-    if (difference > expiryTime) return false
+    if (difference > expiryTime) return false;
     return data.data;
 }
 
@@ -47,6 +49,7 @@ function renderData(data) {
         return `
         <div class="article">
         <h2>${element.title}</h2>
+        <h4>Written by ${element.author}</h4>
         <p class="post-body">${element.article}<p>
         </div>
     `
