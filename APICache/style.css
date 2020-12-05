@@ -1,0 +1,21 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background-color: lightblue;
+  height: 100vh;
+  width: 90%;
+  margin: 0 20px;
+}
+
+.all-articles {
+    display: flex;
+}
+
+.article {
+  align-items: center;
+  justify-content: center;
+  margin: 20px;
+  border: 40px;
+}
