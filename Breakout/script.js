@@ -45,6 +45,7 @@ class Bricks {
         this.offsetX = 45;
         this.offsetY = 60;
         this.visible = true;
+        this.bricksArray = [];
     }
 }
 
@@ -112,16 +113,16 @@ class Canvas {
     }
 
     drawBricks() {
-        const bricksArray = [];
+        // const bricksArray = [];
         for (let i = 0; i < this.bricks.brickRowCount; i++) {
-            bricksArray[i] = [];
+            this.bricks.bricksArray[i] = [];
             for (let j = 0; j < this.bricks.brickColumnCount; j++) {
                 const x = i * (this.bricks.w + this.bricks.padding) + this.bricks.offsetX;
                 const y = j * (this.bricks.h + this.bricks.padding) + this.bricks.offsetY;
-                bricksArray[i][j] = { x, y, ...this.bricks }
+                this.bricks.bricksArray[i][j] = { x, y, ...this.bricks }
             }
         }
-        bricksArray.forEach(columns => {
+        this.bricks.bricksArray.forEach(columns => {
             columns.forEach(brick => {
                 this.ctx.beginPath();
                 this.ctx.rect(brick.x, brick.y, brick.w, brick.h);
@@ -137,6 +138,45 @@ class Canvas {
         this.ctx.fillText(`Score: ${this.score}`, this.canvas.width - 100, 30)
     }
 
+    moveBall() {
+        this.ball.x += this.ball.dx;
+        this.ball.y += this.ball.dy;
+
+        if (this.ball.x + this.ball.size > this.canvas.width || this.ball.x - this.ball.size < 0) {
+            this.ball.dx *= -1;
+        }
+
+        if (this.ball.y + this.ball.size > this.canvas.height || this.ball.y - this.ball.size < 0) {
+            this.ball.dy *= -1;
+        }
+
+        if (
+            this.ball.x - this.ball.size > this.paddle.x &&
+            this.ball.x + this.ball.size < this.paddle.x + this.paddle.w &&
+            this.ball.y + this.ball.size > this.paddle.y
+        ) {
+            this.ball.dy = -this.ball.speed;
+        }
+
+        this.bricks.bricksArray.forEach(columns => {
+            columns.forEach(brick => {
+                if (brick.visible) {
+                    if (
+                        this.ball.x - this.ball.size > brick.x && // left brick side check
+                        this.ball.x + this.ball.size < brick.x + brick.w && // right brick side check
+                        this.ball.y + this.ball.size > brick.y && // top brick side check
+                        this.ball.y - this.ball.size < brick.y + brick.h // bottom brick side check
+                    ) {
+                        this.ball.dy *= -1;
+                        brick.visible = false;
+                        console.log(brick.visible)
+                    }
+                }
+            })
+        })
+        // console.log(this.bricksArray);
+    }
+
     movePaddle() {
         this.paddle.x += this.paddle.dx;
         if (this.paddle.x + this.paddle.w > this.canvas.width) {
@@ -150,7 +190,7 @@ class Canvas {
 
     update() {
         this.movePaddle();
-
+        this.moveBall();
         //All rerendering here
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
         this.drawBall();
