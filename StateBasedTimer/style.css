@@ -21,10 +21,9 @@ h1 {
 }
 
 button {
-  position: absolute;
-  height: 40px;
+  position: flex;
+  flex-direction: column;
   width: 80vw;
-  top: 95vh;
   border-radius: 5px;
   font-size: 25px;
   align-items: center;

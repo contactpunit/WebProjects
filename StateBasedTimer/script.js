@@ -5,7 +5,7 @@ var timerClick = function (selector, { timer, template } = {}) {
     this.template = template;
 };
 
-timerClick.prototype.start = function() {
+timerClick.prototype.start = function () {
     const button = document.querySelector('button');
     button.addEventListener('click', this.template.bind(this))
 }
@@ -16,7 +16,7 @@ const t = new timerClick('ul', {
         let counter = this.timer;
         this.elem.innerHTML = '';
         const printValue = window.setInterval(() => {
-            let li = document.createElement('li');  
+            let li = document.createElement('li');
             li.appendChild(document.createTextNode(`${counter}`));
             this.elem.appendChild(li);
             counter -= 1;
