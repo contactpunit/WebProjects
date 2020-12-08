@@ -1,0 +1,36 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  display: block;
+  width: 80vw;
+  height: 100vh;
+}
+
+.app {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+h1 {
+  text-align: center;
+  margin-top: 10px;
+  color: blue;
+}
+
+button {
+  position: absolute;
+  height: 40px;
+  width: 80vw;
+  top: 95vh;
+  border-radius: 5px;
+  font-size: 25px;
+  align-items: center;
+  cursor: pointer;
+}
+
+li {
+  list-style: none;
+}
