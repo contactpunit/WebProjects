@@ -29,9 +29,9 @@ NewYear.prototype.calculateTimeElements = function () {
 
 NewYear.prototype.render = function (nextYear, days, hours, minutes, seconds) {
     this.daysEl.innerHTML = days;
-    this.hoursEl.innerHTML = hours;
-    this.minutesEl.innerHTML = minutes;
-    this.secondsEl.innerHTML = seconds;
+    this.hoursEl.innerHTML = hours.toString().padStart(2, '0');
+    this.minutesEl.innerHTML = minutes.toString().padStart(2, '0');
+    this.secondsEl.innerHTML = seconds.toString().padStart(2, '0');
     this.nextYearEl.innerHTML = nextYear;
 }
 
