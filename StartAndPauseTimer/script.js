@@ -60,5 +60,5 @@ timerClick.prototype.clear = function () {
 }
 
 const t = new timerClick('ul', {
-    timer: 4
+    timer: 20
 });
