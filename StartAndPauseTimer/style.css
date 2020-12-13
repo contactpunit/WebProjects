@@ -4,7 +4,7 @@
 
 body {
   display: block;
-  width: 80vw;
+  width: 100vw;
   height: 100vh;
 }
 
@@ -20,13 +20,20 @@ h1 {
   color: blue;
 }
 
-button {
+.button {
   position: flex;
-  flex-direction: column;
-  width: 80vw;
+  width: inherit;
+  width: 100vw;
+  justify-content: space-between;
+  align-items: center;
+  text-align: center;
+}
+
+
+button {
+  /* width: 30vw; */
   border-radius: 5px;
   font-size: 25px;
-  align-items: center;
   cursor: pointer;
 }
 
