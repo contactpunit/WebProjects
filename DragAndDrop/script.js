@@ -14,8 +14,40 @@ class DragDrop {
             'Michael Bloomberg',
             'Larry Page'
         ];
+
         this.randomPersons = this.shuffle([...this.richPersons]);
-        console.log(this.randomPersons);
+        this.render();
+        this.draggables = document.querySelectorAll('.draggable');
+        this.dragListItemEl = document.querySelectorAll('.draggable-list li');
+        this.draggables.forEach(element => {
+            element.addEventListener('dragstart', this.dragStart);
+        })
+        this.dragListItemEl.forEach(item => {
+            item.addEventListener('dragover', this.dragOver);
+            item.addEventListener('drop', this.drop);
+            item.addEventListener('dragenter', this.dragEnter);
+            item.addEventListener('dragleave', this.dragLeave);
+        })
+    }
+
+    dragStart() {
+        console.log('drag started');
+    }
+
+    dragOver() {
+        console.log('drag over');
+    }
+
+    dragEnter() {
+        console.log('drag enter');
+    }
+
+    dragLeave() {
+        console.log('drag leave');
+    }
+
+    drop() {
+        console.log('drag drop');
     }
 
     shuffle(randomPersons) {
@@ -47,4 +79,4 @@ class DragDrop {
 }
 
 const c = new DragDrop()
-c.render();
+// c.render();
