@@ -29,12 +29,18 @@ class DragDrop {
             item.addEventListener('dragenter', this.dragEnter.bind(item));
             item.addEventListener('dragleave', this.dragLeave.bind(item));
         })
-        this.checkBtn.addEventListener('click', this.verifyAndRenderOrder.bind(this));
+        this.checkBtn.addEventListener('click', this.verifyOrderAndRender.bind(this));
     }
 
-    verifyAndRenderOrder() {
-        this.randomPersons.forEach(person => {
-            console.log(person.textContent.trim().split('\n')[2])
+    verifyOrderAndRender() {
+        this.randomPersons.forEach((person, index) => {
+            const personName = person.textContent.trim().split('\n')[2].trim();
+            if (personName === this.richPersons[index]) {
+                person.classList.add('right');
+            }
+            else {
+                person.classList.add('wrong');
+            }
         })
     }
 
@@ -92,4 +98,4 @@ class DragDrop {
     }
 }
 
-const c = new DragDrop()
+new DragDrop()
