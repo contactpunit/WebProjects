@@ -2,6 +2,7 @@ class DragDrop {
     constructor() {
         this.draggableList = document.querySelector('.draggable-list');
         this.checkBtn = document.querySelector('.check-btn');
+        this.randomPersons = [];
         this.richPersons = [
             'Jeff Bezos',
             'Bill Gates',
@@ -15,55 +16,67 @@ class DragDrop {
             'Larry Page'
         ];
 
-        this.randomPersons = this.shuffle([...this.richPersons]);
-        this.render();
+        const persons = this.shuffle([...this.richPersons]);
+        this.render(persons);
         this.draggables = document.querySelectorAll('.draggable');
         this.dragListItemEl = document.querySelectorAll('.draggable-list li');
         this.draggables.forEach(element => {
-            element.addEventListener('dragstart', this.dragStart);
+            element.addEventListener('dragstart', this.dragStart.bind(element));
         })
         this.dragListItemEl.forEach(item => {
-            item.addEventListener('dragover', this.dragOver);
-            item.addEventListener('drop', this.drop);
-            item.addEventListener('dragenter', this.dragEnter);
-            item.addEventListener('dragleave', this.dragLeave);
+            item.addEventListener('dragover', this.dragOver.bind(item));
+            item.addEventListener('drop', this.drop.bind(item, this.randomPersons));
+            item.addEventListener('dragenter', this.dragEnter.bind(item));
+            item.addEventListener('dragleave', this.dragLeave.bind(item));
+        })
+        this.checkBtn.addEventListener('click', this.verifyAndRenderOrder.bind(this));
+    }
+
+    verifyAndRenderOrder() {
+        this.randomPersons.forEach(person => {
+            console.log(person.textContent.trim().split('\n')[2])
         })
     }
 
     dragStart() {
-        console.log('drag started');
+        DragDrop.startIndex = +this.closest('li').getAttribute('data-index');
     }
 
-    dragOver() {
-        console.log('drag over');
+    dragOver(e) {
+        e.preventDefault();
     }
 
     dragEnter() {
-        console.log('drag enter');
+        this.classList.add('over');
     }
 
     dragLeave() {
-        console.log('drag leave');
+        this.classList.remove('over');
     }
 
-    drop() {
-        console.log('drag drop');
+    drop(persons) {
+        this.classList.remove('over');
+        DragDrop.endIndex = +this.closest('li').getAttribute('data-index');
+        const movedItem = persons[DragDrop.startIndex].querySelector('.draggable');
+        const replacedItem = persons[DragDrop.endIndex].querySelector('.draggable');
+        persons[DragDrop.startIndex].appendChild(replacedItem);
+        persons[DragDrop.endIndex].appendChild(movedItem);
     }
 
-    shuffle(randomPersons) {
-        var currentIndex = randomPersons.length, temporaryValue, randomIndex;
+    shuffle(persons) {
+        var currentIndex = persons.length, temporaryValue, randomIndex;
         while (0 !== currentIndex) {
             randomIndex = Math.floor(Math.random() * currentIndex);
             currentIndex -= 1;
-            temporaryValue = randomPersons[currentIndex];
-            randomPersons[currentIndex] = randomPersons[randomIndex];
-            randomPersons[randomIndex] = temporaryValue;
+            temporaryValue = persons[currentIndex];
+            persons[currentIndex] = persons[randomIndex];
+            persons[randomIndex] = temporaryValue;
         }
-        return randomPersons;
+        return persons;
     }
 
-    render() {
-        this.randomPersons.forEach((person, index) => {
+    render(persons) {
+        persons.forEach((person, index) => {
             const listItem = document.createElement('li');
             listItem.setAttribute('data-index', index);
             listItem.innerHTML = `
@@ -74,9 +87,9 @@ class DragDrop {
                 </div>
             `
             this.draggableList.appendChild(listItem);
+            this.randomPersons.push(listItem);
         });
     }
 }
 
 const c = new DragDrop()
-// c.render();
