@@ -36,9 +36,11 @@ class DragDrop {
         this.randomPersons.forEach((person, index) => {
             const personName = person.textContent.trim().split('\n')[2].trim();
             if (personName === this.richPersons[index]) {
+                person.classList.remove('wrong');
                 person.classList.add('right');
             }
             else {
+                person.classList.remove('right');
                 person.classList.add('wrong');
             }
         })
