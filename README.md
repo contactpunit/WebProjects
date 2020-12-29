@@ -49,3 +49,5 @@ This is a collection of web problems, solved using :
 #### 34. Speech Game
 #### 35. Expanding Cards
 #### 36. Progress Steps
+#### 37. Search Widget
+#### 38. Content Styling
