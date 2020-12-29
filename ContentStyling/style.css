@@ -123,6 +123,11 @@ nav ul li + li + li {
   transform: translateX(-200%);
 }
 
+.container.show-nav .circle {
+  transform: rotate(-70deg);
+}
+
 .container.show-nav + nav li {
   transform: translateX(0);
+  transition-delay: 0.3s;
 }
