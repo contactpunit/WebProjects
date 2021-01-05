@@ -88,3 +88,38 @@ h1 {
   height: 100%;
   background-color: rgba(43, 43, 43, 0.8);
 }
+
+.split.right,
+.split.left,
+.split.right::before,
+.split.left::before {
+  transition: all 1000ms ease-in-out;
+}
+
+.hover-left .left {
+  width: 75%;
+  transform: translate() 0.5 ease;
+}
+
+.hover-left .right {
+  width: 25%;
+}
+
+.hover-right .left {
+  width: 25%;
+}
+
+.hover-right .right {
+  width: 75%;
+}
+
+@media (max-width: 800px) {
+  h1 {
+    font-size: 2rem;
+  }
+
+  .btn {
+    width: 12rem;
+    padding: 1.2rem;
+  }
+}
