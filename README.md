@@ -54,3 +54,4 @@ This is a collection of web problems, solved using :
 #### 39. Blurry Loading
 #### 40. Scroll Animation
 #### 41. Split Landing Hover effect
+#### 42. Login Page
