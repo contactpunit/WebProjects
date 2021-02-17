@@ -61,3 +61,4 @@ This is a collection of web problems, solved using :
 #### 46. Faq Collapse
 #### 47. Random Picker
 #### 48. OffCanvas Menu
+#### 49. Create Modal
